@@ -196,6 +196,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/poyehchen/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/poyehchen/.local/share/nvim/site/pack/packer/start/vim-surround"
+  },
   vimwiki = {
     loaded = false,
     needs_bufread = true,

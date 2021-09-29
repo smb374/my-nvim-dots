@@ -126,8 +126,8 @@ require("packer").startup(function(use)
   use("simrat39/rust-tools.nvim")
   -- nvim dev
   use("folke/lua-dev.nvim")
-  -- galaxy line
-  -- use("glepnir/galaxyline.nvim")
   -- Editorconfig
   use("gpanders/editorconfig.nvim")
+  -- surround
+  use("tpope/vim-surround")
 end)
