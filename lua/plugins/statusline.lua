@@ -1,5 +1,6 @@
 local colors = require("colors").get()
 local lsp = require("feline.providers.lsp")
+local feline = require("feline")
 
 local num = {
     "❶",
@@ -23,7 +24,6 @@ local num = {
     "⓳",
     "⓴"
 }
-
 
 local icon_styles = {
   default = {
@@ -108,12 +108,13 @@ components.active[1][1] = {
 }
 
 components.active[1][2] = {
-  provider = function()
-    local filename = vim.fn.expand("%:t")
-    local extension = vim.fn.expand("%:e")
+  provider = function(winid)
+    local buf = vim.api.nvim_win_get_buf(winid)
+    local name = vim.api.nvim_buf_get_name(buf)
+    local _, filename, extension = string.match(name, "(.-)([^\\/]-%.?([^%.\\/]*))$")
     local icon = require("nvim-web-devicons").get_icon(filename, extension)
     if icon == nil then
-      icon = " "
+      icon = "  "
       return icon
     end
     return " " .. icon .. " " .. filename .. " "
@@ -366,9 +367,10 @@ components.active[3][9] = {
 }
 
 components.active[3][10] = {
-  provider = function()
-    local current_line = vim.fn.line(".")
-    local total_line = vim.fn.line("$")
+  provider = function(winid)
+    local buf = vim.api.nvim_win_get_buf(winid)
+    local current_line, _ = unpack(vim.api.nvim_win_get_cursor(winid))
+    local total_line = vim.api.nvim_buf_line_count(buf)
 
     if current_line == 1 then
       return " Top "
@@ -384,12 +386,107 @@ components.active[3][10] = {
     bg = colors.one_bg,
   },
 }
-components.inactive = components.active
+components.inactive[1][1] = {
+  -- provider = statusline_style.main_icon,
+  provider = function (winid)
+    local winnr = vim.api.nvim_win_get_number(winid)
+    if num[winnr] ~= nil then
+      return ' '..num[winnr]..' '
+    else
+      return ' '..tostring(winnr)..' '
+    end
+  end,
+  hl = {
+    fg = colors.statusline_bg,
+    bg = colors.nord_blue,
+  },
 
-require("feline").setup({
+  right_sep = {
+    str = statusline_style.right,
+    hl = {
+      fg = colors.nord_blue,
+      bg = colors.lightbg,
+    },
+  },
+}
+
+components.inactive[1][2] = {
+  provider = function(winid)
+    local buf = vim.api.nvim_win_get_buf(winid)
+    local name = vim.api.nvim_buf_get_name(buf)
+    local _, filename, extension = string.match(name, "(.-)([^\\/]-%.?([^%.\\/]*))$")
+    local icon = require("nvim-web-devicons").get_icon(filename, extension)
+    if icon == nil then
+      icon = "  "
+      if filename == "NvimTree" then
+        return ' '..filename..' '
+      else
+        return icon
+      end
+    end
+    return " " .. icon .. " " .. filename .. " "
+  end,
+  hl = {
+    fg = colors.white,
+    bg = colors.lightbg2,
+  },
+
+  right_sep = {
+    str = statusline_style.right,
+    hl = { fg = colors.lightbg2, bg = colors.statusline_bg },
+  },
+}
+
+components.inactive[3][1] = {
+  provider = statusline_style.left,
+  hl = {
+    fg = colors.grey,
+    bg = colors.statusline_bg,
+  },
+}
+
+components.inactive[3][2] = {
+  provider = statusline_style.left,
+  hl = {
+    fg = colors.green,
+    bg = colors.grey,
+  },
+}
+
+components.inactive[3][3] = {
+  provider = statusline_style.position_icon,
+  hl = {
+    fg = colors.black,
+    bg = colors.green,
+  },
+}
+
+components.inactive[3][4] = {
+  provider = function(winid)
+    local buf = vim.api.nvim_win_get_buf(winid)
+    local current_line, _ = unpack(vim.api.nvim_win_get_cursor(winid))
+    local total_line = vim.api.nvim_buf_line_count(buf)
+
+    if current_line == 1 then
+      return " Top "
+    elseif current_line == total_line then
+      return " Bot "
+    end
+    local result, _ = math.modf((current_line / total_line) * 100)
+    return " " .. result .. "%% "
+  end,
+
+  hl = {
+    fg = colors.green,
+    bg = colors.one_bg,
+  },
+}
+
+feline.setup({
   colors = {
     bg = colors.statusline_bg,
     fg = colors.fg,
   },
   components = components,
 })
+

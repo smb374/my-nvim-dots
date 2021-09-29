@@ -27,6 +27,9 @@ g.lsp_config = {
         diagnostics = {
           globals = { "vim" },
         },
+        runtime = {
+          version = "LuaJIT",
+        },
       },
     },
   },
