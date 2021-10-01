@@ -6,6 +6,7 @@ g.indent_blankline_filetype_exclude = {
   "packer",
   "dashboard",
   "nvim-tree",
+  "NvimTree",
 }
 
 -- Ignore for indent levels

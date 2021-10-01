@@ -130,4 +130,20 @@ require("packer").startup(function(use)
   use("gpanders/editorconfig.nvim")
   -- surround
   use("tpope/vim-surround")
+  -- winshift
+  use({
+    "sindrets/winshift.nvim",
+    opt = true,
+    cmd = { "WinShift" },
+  })
+  -- focus.nvim
+  use({
+    "beauwilliams/focus.nvim",
+    opt = true,
+    cmd = { "FocusSplitNicely", "FocusSplitCycle" },
+    module = "focus",
+    config = function()
+        require("focus").setup({hybridnumber = true})
+    end
+  })
 end)

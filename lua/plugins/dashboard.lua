@@ -53,4 +53,4 @@ g.dashboard_custom_section = {
   },
 }
 
-g.dashboard_custom_footer = { "KYOTO.NVIM" }
+g.dashboard_custom_footer = { "By smb374, from kyoto.nvim" }

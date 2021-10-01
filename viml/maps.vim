@@ -3,35 +3,35 @@ inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Go to the beginning of the line in insert mode
-inoremap <silent><C-a> <C-o>0
+" inoremap <silent><C-a> <C-o>0
 " Go to the ending of the line in insert mode
-inoremap <silent><C-z> <C-o>$
+" inoremap <silent><C-z> <C-o>$
 " Paste from the system clipboard(in normal mode)
-nnoremap <silent><leader>y "*y
+" nnoremap <silent><leader>y "*y
 " Paste from the system clipboard(in visual mode)
-vnoremap <silent><leader>y "*y
+" vnoremap <silent><leader>y "*y
 " Cut from the system clipboard(in normal mode)
-nnoremap <silent><leader>x "*x
+" nnoremap <silent><leader>x "*x
 " Cut from the system clipboard(in visual mode)
-vnoremap <silent><leader>x "*x
+" vnoremap <silent><leader>x "*x
 " Paste from the system clipboard(in normal mode)
-nnoremap <silent><leader>p "*p
+" nnoremap <silent><leader>p "*p
 " Paste from the system clipboard(in visual mode)
-nnoremap <silent><leader>p "*p
+" nnoremap <silent><leader>p "*p
 " Select everything
-nnoremap <silent><leader>a ggVG
+" nnoremap <silent><leader>a ggVG
 " Delete a buffer
-nnoremap <silent><leader>bd :bd<CR>
+" nnoremap <silent><leader>bd :bd<CR>
 " Escape in terminal mode takes you to normal mode
-tnoremap <silent><leader><Esc> <C-\><C-n>
+" tnoremap <silent><leader><Esc> <C-\><C-n>
 " Create a new blank buffer
-nnoremap <leader>gg :enew<CR>
+" nnoremap <leader>gg :enew<CR>
 " Toggle search highlight
-nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hlsearch \| endif<cr>
+" nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hlsearch \| endif<cr>
 " Do not make Q go to ex-mode
-nnoremap Q <Nop>
+" nnoremap Q <Nop>
 
-" Wrap selection with '' 
+" Wrap selection with ''
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 " Wrap selection with ""
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
@@ -55,7 +55,7 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev B buffer
 
-" Change buffer sizes 
+" Change buffer sizes
 "
 
 " Make buffer narrower
@@ -76,7 +76,7 @@ tnoremap <silent> <C-K> :resize +4<CR>
 " Create/Toggle a terminal to the bottom
 nnoremap <silent><leader>` :call ChooseTerm("term-slider", 1)<CR>
 tnoremap <silent><leader>` <C-\><C-n>:call ChooseTerm("term-slider", 1)<CR>
-" Create/Toggle a terminal in a buffer 
+" Create/Toggle a terminal in a buffer
 nnoremap <silent><leader><CR> :call ChooseTerm("term-pane", 0)<CR>
 tnoremap <silent><leader><CR> <C-\><C-n>:call ChooseTerm("term-pane", 0)<CR>
 
@@ -89,7 +89,7 @@ function! ChooseTerm(termname, slider)
         if a:slider > 0
             :exe pane . "wincmd c"
         else
-            :exe "e #" 
+            :exe "e #"
         endif
     elseif buf > 0
         " buffer is not in pane
@@ -129,7 +129,7 @@ nnoremap <silent><leader>fc :Telescope commands<CR>
 nnoremap <silent><leader>fz :Telescope current_buffer_fuzzy_find<CR>
 " Fuzzy workspace symbols
 nnoremap <silent><leader>fs :Telescope lsp_workspace_symbols<CR>
-" Search projects (projects.nvim) 
+" Search projects (projects.nvim)
 nnoremap <silent><leader>fp :Telescope projects<CR>
 
 " Symbols Finder
